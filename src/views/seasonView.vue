@@ -202,7 +202,7 @@ h3 {
 .flex {
   position: relative;
   z-index: 0 !important;
-  --corner-size: 2em;
+  /* --corner-size: 2em; */
   display: flex;
   background-color: #ffff;
   clip-path: polygon(
@@ -244,7 +244,10 @@ h3 {
 .text-area {
   text-align: left;
   padding: 8px 4px 8px 16px;
-  box-shadow: 0 0 32px 0 #cacde1;
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+  border-radius: 16px;
+  box-shadow: 0 0 20px 0 #cacde1;
   width: -webkit-fill-available;
 }
 .upvote-icon {

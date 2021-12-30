@@ -1,9 +1,7 @@
 <template>
   <div class="general-view">
     <div class="home-banner">
-      <h2>
-        Let's Talk About Family Guy
-      </h2>
+      <h2>Let's Talk About Family Guy</h2>
     </div>
     <div class="overview">
       <div class="info-section">
@@ -15,16 +13,21 @@
         </div> -->
       </div>
       <div class="season-section">
+        <div class="pick-season">
+          <span class="align-text-center">
+            Pick a season
+          </span>
+        </div>
         <div class="button-container">
           <button
             v-for="(season, index) in seasonList"
             :id="index"
             :key="index"
             class="button-season-list"
-            :class=" index+1 == current_season ? 'active-button': ''"
-            @click="fetch(index+1)"
+            :class="index + 1 == current_season ? 'active-button' : ''"
+            @click="fetch(index + 1)"
           >
-            Season {{ index +1 }}
+            {{ index + 1 }}
           </button>
         </div>
       </div>
@@ -43,76 +46,73 @@ export default {
   data() {
     return {
       seasonList: [],
-	    current_season: this.$route.params.id
+      current_season: this.$route.params.id,
     };
   },
-  watch:{
-    'current_season'(val){
-      if(val){
-        this.fetch(Number(val))
+  watch: {
+    current_season(val) {
+      if (val) {
+        this.fetch(Number(val));
       }
-    }
+    },
   },
-  created(){
+  created() {
     this.fetch(Number(this.current_season));
-    for(let i=0; i<21; i++){
-      this.seasonList.push(i)
+    for (let i = 0; i < 21; i++) {
+      this.seasonList.push(i);
     }
   },
-  methods:{ 
+  methods: {
     fetch(index) {
-      // let current_season_button = document.getElementById();
-      // console.log(current_season_button)
-
       var params = {
         // id: 'tt0182576',
-        seasonNumber: index
-      }
+        seasonNumber: index,
+      };
       //const apikey = 'k_y7s2rd5h';
       this.$store.dispatch('getSeason', params).then((response) => {
-        if(index != this.current_season){
-          this.$router.push({ name :'season', params : { id : index  }});
-          this.current_season = index
+        if (index != this.current_season) {
+          this.$router.push({ name: 'season', params: { id: index } });
+          this.current_season = index;
         }
-        this.$store.commit('set_current_season', response.episodes)
+        this.$store.commit('set_current_season', response.episodes);
       });
-      
+
       // axios.get('https://imdb-api.com/en/API/SeasonEpisodes/'+apikey+'/'+params.id+'/'+params.seasonNumber)
       //   .then((response) => {
       //     this.$store.commit('set_current_season', response.data.episodes)
       //   })
-
-      //current_season_button.classList.add('active_season');
-
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-:root{
+:root {
   color-scheme: ligt dark;
   --primary-background: #6a73b6;
-  --white: #FFF;
+  --white: #fff;
   --secondary-background: #030303;
-  --header-font: 'Roboto Mono', monospace;
+  --header-font: "Roboto Mono", monospace;
 }
 
-@media (prefers-color-scheme: dark){
-  :root{
-    --secondary-background: #0A3260;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --secondary-background: #0a3260;
   }
 }
 
-.active-button{
+.active-button {
   background-color: var(--primary-background) !important;
 }
 
-h2{
+h2 {
   color: canvas;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
 }
 .button-season-list {
+  font-family: Roboto;
+  font-size: 1rem;
+  font-weight: 600;
   margin: 8px 6px 8px 6px;
   outline: none;
   height: 25px !important;
@@ -120,7 +120,7 @@ h2{
   cursor: pointer;
   border-radius: 15px;
   color: black;
-  background:  rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.15);
   border: 2px solid rgba(255, 255, 255, 0.15);
   width: 105px !important;
 }
@@ -128,19 +128,32 @@ h2{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  border: 2px solid #E5E5E5;
+  justify-content: flex-start;
+}
+.pick-season{
+  font-family: Roboto;
+  font-size: 150%;
+  font-weight: 700;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+
+}
+.align-text-center{
+  vertical-align: middle;
+  display: inline-block;
+}
+.season-section {
+  display:flex;
+  background-color: var(--white);
+  padding: 0.5rem;
+  color: canvas;
+  border: 2px solid #e5e5e5;
   box-sizing: border-box;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
-  /* border-radius: 16px; */
-  justify-content: space-between;
-}
-.season-section {
-  background-color: var(--white);
-  padding: 0;
-  color: canvas;
 }
 .home-banner {
   margin: 1rem;
@@ -161,13 +174,13 @@ h2{
   margin-right: auto; */
 }
 .info-section {
-    /* background-color: var(--primary-background); */
-    height: 300px;
-    padding: 16px;
-    color: canvas;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-image: url(/img/familyguy.ba4ae1b1.png) /* text-align: left; */;
+  /* background-color: var(--primary-background); */
+  height: 300px;
+  padding: 16px;
+  color: canvas;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-image: url(/img/familyguy.ba4ae1b1.png) /* text-align: left; */;
 }
 .info-image {
   border-radius: 8px;
@@ -186,7 +199,7 @@ h2{
   .general-view {
     width: 100% !important;
   }
-  .button-season-list{
+  .button-season-list {
     max-width: 28%;
   }
 }
