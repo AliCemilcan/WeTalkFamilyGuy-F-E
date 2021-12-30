@@ -134,7 +134,7 @@ h2 {
   font-family: Roboto;
   font-size: 150%;
   font-weight: 700;
-  width: 30%;
+  width: 40%;
   display: flex;
   justify-content: center;
 
@@ -150,8 +150,7 @@ h2 {
   color: canvas;
   border: 2px solid #e5e5e5;
   box-sizing: border-box;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
+  border-top: none;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
 }
@@ -178,6 +177,8 @@ h2 {
   height: 300px;
   padding: 16px;
   color: canvas;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-image: url(/img/familyguy.ba4ae1b1.png) /* text-align: left; */;
@@ -201,6 +202,18 @@ h2 {
   }
   .button-season-list {
     max-width: 28%;
+  }
+  .button-container{
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .season-section{
+    flex-flow: column;
+    align-items: center;
+  }
+  .pick-season{
+    width: 40%;
   }
 }
 </style>

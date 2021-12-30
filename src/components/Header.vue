@@ -48,12 +48,6 @@ about.html"
             </router-link>
           </li>
         </ul>
-        <a
-          class="hamburger-text"
-          href="index.html"
-        >We just talk about
-          <h3>Family Guy</h3>
-        </a>
         <div class="hamburger">
           <span class="bar" />
           <span class="bar" />
@@ -183,6 +177,12 @@ nav a:hover, .nav-link:hover{
     }
     .hamburger-text{
       width: 70%;
+    }
+    .header{
+      top: 3rem !important;
+    }
+    nav{ 
+      padding: 0 !important;
     }
     nav ul {
         position: fixed;

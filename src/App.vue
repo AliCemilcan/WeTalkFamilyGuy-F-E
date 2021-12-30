@@ -58,7 +58,7 @@ html {
   margin-right: auto; */
 }
 #main-view{
-  padding: 0% 5% 0% 5%;
+  padding: 0% 10% 2% 10%;
 
 }
 .header {

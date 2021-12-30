@@ -325,7 +325,7 @@ h3 {
   border-radius: 16px;
 }
 .season-padding{
-  padding: 12px 26px 12px 26px;
+  padding: 1rem 0rem;
 }
 @media all and (max-width: 700px) {
   .flex {
