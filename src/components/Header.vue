@@ -11,20 +11,7 @@
             </router-link>
           </li>
           
-          <li>
-            <a
-              class="nav-link"
-              href="
-about.html"
-            >About</a>
-          </li>
-          <li>
-            <a
-              href="#contacts"
-              class="nav-link"
-            >Contacts</a>
-          </li>
-          
+    
           <li>
             <a
               class="nav-link"
@@ -135,6 +122,9 @@ nav{
 }
 nav h1 a{
   font-family: Roboto;
+}
+li a{
+  cursor: pointer;
 }
 nav ul{
   font-family: Roboto;

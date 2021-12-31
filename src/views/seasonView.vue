@@ -17,8 +17,8 @@
               >
             </a>
             <div class="text-area">
-              <span class="episode-number">Episode {{ e.episodeNumber }}</span>
-              <br>
+              <span class="episode-number">EPISODE {{ e.episodeNumber }}</span>
+              <!-- <br> -->
               <div class="episode-title margin-left-10 mt-2">
                 <span>"{{ e.title }}"</span>
               </div>
@@ -121,12 +121,12 @@ export default {
       //   console.log(res)
       // });
 
-      this.get_current_season.forEach((elem) => {
-        elem.seasonEpisode = 'S' + elem.seasonNumber + 'E' + elem.episodeNumber;
-        this.$store.dispatch('createEpisode', elem).then((res) => {
-          console.log(res);
-        });
-      });
+      // this.get_current_season.forEach((elem) => {
+      //   elem.seasonEpisode = 'S' + elem.seasonNumber + 'E' + elem.episodeNumber;
+      //   this.$store.dispatch('createEpisode', elem).then((res) => {
+      //     console.log(res);
+      //   });
+      // });
     },
   },
 };
@@ -168,12 +168,13 @@ h3 {
 }
 .episode-number {
   font-family: Roboto;
-  font-size: 22px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: 28px;
   letter-spacing: 0em;
   text-align: left;
+  color: #000000;
 }
 .episode_list {
   padding: 12px;
@@ -187,7 +188,7 @@ h3 {
   max-width: 250px;
   max-height: 150px;
   min-width: 250px;
-  min-height: 150px;
+  min-height: 152px;
   border-radius: 16px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
@@ -238,10 +239,14 @@ h3 {
   flex-flow: row;
   /* justify-content: space-between; */
   gap: 1rem;
-  position: absolute;
-  bottom: 0.4rem;
+  /* position: absolute;
+  bottom: 0.4rem; */
 }
 .text-area {
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+  row-gap: 1rem;
   text-align: left;
   padding: 8px 4px 8px 16px;
   border-top-left-radius: 0px !important;
@@ -330,9 +335,17 @@ h3 {
 @media all and (max-width: 700px) {
   .flex {
     gap: 0.1rem;
+    flex-direction: column;
   }
   .episode_img_holder {
-    max-width: none;
+    min-width: 100%;
+    max-width: 100%;
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  .text-area{
+    border-top-right-radius: 0px;
   }
   .episode_list{
     padding: 2px;
@@ -345,7 +358,16 @@ h3 {
     display: none;
   }
 }
-@media all and (max-width: 1070px) {
+@media all and (max-width: 1070px){
+  .episode_list,
+  .topic_list {
+    width: 100%;
+  }
+  .season_list {
+    flex-flow: column;
+  }
+}
+@media all and (min-width: 701px) and (max-width: 1070px) {
   .episode_list,
   .topic_list {
     width: 100%;
@@ -357,9 +379,14 @@ h3 {
     max-width: 110px;
     min-width: 110px;
   }
+  .text-area{
+    padding: 8px 4px 8px 16px;
+    row-gap: 0.5rem;
+  }
+  
  
 }
-@media all and (max-width: 1270px) {
+@media all and (min-width: 1071px) and (max-width: 1270px) {
   .episode_img_holder {
     max-width: 200px;
     min-width:200px;

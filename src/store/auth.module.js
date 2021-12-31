@@ -3,6 +3,7 @@ import JwtService from '@/services/jwt.service';
 
 const state = {
   errors: null,
+  error_status: false,
   user: {},
   isAuthenticated: !!JwtService.getToken()
 };
@@ -16,7 +17,10 @@ const getters = {
   },
   getErrors(state) {
     return state.errors;
-  }
+  },
+  getErrorStatus(state) {
+    return state.error_status;
+  },
 };
 
 const actions = {
@@ -48,11 +52,11 @@ const actions = {
     return new Promise(resolve => {
       ApiService.post('googleAuth', credentials)
         .then(({ data }) => {
-          context.commit('authenticateUser', data);
           resolve(data);
+          context.commit('authenticateUser', data);
         })
         .catch(({ response }) => {
-          context.commit('setError', response.data.errors);
+          context.commit('setError', response.data);
         });
     });
   },
@@ -77,6 +81,7 @@ const mutations = {
     state.isAuthenticated = true;
     state.user = data.user;
     state.errors = {};
+    state.error_status = false
     JwtService.saveToken(data.token);
     ApiService.setHeader();
   },
@@ -88,6 +93,7 @@ const mutations = {
     state.isAuthenticated = false;
     state.user = {};
     state.errors = {};
+    state.error_status = false
     JwtService.destroyToken();
   }
 };

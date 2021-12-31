@@ -102,7 +102,8 @@ export default {
             profileImage: GoogleUser.getBasicProfile().getImageUrl()
           };
           this.$store.dispatch('googleAuth', params).then(() => {
-            this.$router.push({ name: 'main' });
+            this.$router.push({ name: 'season', params: {id: 1} });
+
           });
         })
         .catch(error => {

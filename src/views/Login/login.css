@@ -1,7 +1,7 @@
 .login-main{
   background-color: var(--white);
   box-shadow: 0 0 32px 0 #cacde1;
-  min-height: 799px;
+  min-height: 700px;
   padding: 2%;
 
 }
@@ -104,4 +104,11 @@ label {
 .login-choice span:after, .login-choice span:before {
     content: "";
     border-top: 1px solid #e5e8ed;
+}
+
+@media all and (max-width: 700px) {
+  .small_form{
+    width:90%;
+    margin: 0 auto;
+  }
 }

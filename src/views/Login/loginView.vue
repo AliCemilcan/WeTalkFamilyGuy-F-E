@@ -35,7 +35,7 @@
             required
           />
           <b-form-invalid-feedback
-            :state="getErrors"
+            :state="getErrorStatus"
           >
             Password Wrong
           </b-form-invalid-feedback>
@@ -110,7 +110,7 @@ export default {
       //   return '';
       // }
     },
-    ...mapGetters(['getErrors'])
+    ...mapGetters(['getErrors','getErrorStatus'])
   },
   methods: {
     onSubmit() {
@@ -120,7 +120,7 @@ export default {
           password: this.form.password_1
         };
         this.$store.dispatch('UserLogin', params).then(() => {
-          this.$router.push({ name: 'main' });
+          this.$router.push({ name: 'season', params: {id: 1} });
         });
       }
     },

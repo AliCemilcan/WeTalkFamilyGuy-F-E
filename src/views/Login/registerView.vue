@@ -177,7 +177,8 @@ export default {
           password: this.form.password_1
         };
         this.$store.dispatch('UserSignUp', params).then(() => {
-          this.$router.push({ name: 'main' });
+          this.$router.push({ name: 'season', params: {id: 1} });
+
         });
       }
     },

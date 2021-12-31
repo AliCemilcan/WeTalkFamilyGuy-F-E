@@ -22,7 +22,7 @@
           <button
             v-for="(season, index) in seasonList"
             :id="index"
-            :key="index"
+            :key="season._id"
             class="button-season-list"
             :class="index + 1 == current_season ? 'active-button' : ''"
             @click="fetch(index + 1)"
@@ -32,13 +32,13 @@
         </div>
       </div>
       <div>
-        <season-view :active-season="current_season" />
+        <season-view :active-season="Number(current_season)" />
       </div>
     </div>
   </div>
 </template>
 <script>
-// import axios from 'axios'
+//import axios from 'axios'
 import seasonView from '../views/seasonView.vue';
 export default {
   name: 'Home',
@@ -46,14 +46,18 @@ export default {
   data() {
     return {
       seasonList: [],
-      current_season: this.$route.params.id,
+      current_season: this.$route.params.id || 1,
     };
   },
   watch: {
-    current_season(val) {
-      if (val) {
-        this.fetch(Number(val));
-      }
+    '$route.params.id': {
+      handler: function(season_number) {
+        if (season_number) {
+          this.fetch(Number(season_number));
+        }
+      },
+      deep: true,
+      immediate: true
     },
   },
   created() {
@@ -134,7 +138,7 @@ h2 {
   font-family: Roboto;
   font-size: 150%;
   font-weight: 700;
-  width: 40%;
+  width: 100%;
   display: flex;
   justify-content: center;
 
@@ -212,8 +216,17 @@ h2 {
     flex-flow: column;
     align-items: center;
   }
-  .pick-season{
-    width: 40%;
-  }
+  
 }
+@media only screen and (max-width: 900px) {
+  .season-section{
+      flex-flow: column;
+      align-items: center;
+    }
+  .button-container{
+    justify-content: center;
+  }
+
+}
+
 </style>
