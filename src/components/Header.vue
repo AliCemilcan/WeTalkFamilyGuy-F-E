@@ -17,21 +17,31 @@
               class="nav-link"
               href="https://github.com/AliCemilcan"
               target="_blank"
-            >Github</a>
+            > <b-icon
+              icon="github"
+              scale="1"
+              variant="" 
+            /></a>
           </li>
           <li v-if="isAuthenticated">
-            <a
-              class="nav-link"
-              @click="
-                logout()"
-            >LogOut</a>
+            <router-link :to="{ name: 'settings' }">
+              <b-icon
+                icon="person-lines-fill"
+                scale="1"
+                variant="" 
+              />
+            </router-link>
           </li>
           <li v-if="!isAuthenticated">
             <router-link
               exact
               :to="{ name: 'login' }"
             >
-              SignIn/Up
+              <b-icon
+                icon="person-square"
+                scale="1"
+                variant="" 
+              />
             </router-link>
           </li>
         </ul>
@@ -135,12 +145,13 @@ nav ul{
   justify-content: center;
   align-items: center;
   gap: 2rem;
+  padding-right: 8rem;
 }
 nav li:first-child{
   flex-basis: 100%;
   text-align: center;
   text-align: left;
-  padding-left: 13%;
+  padding-left: 10%;
  
 }
 nav a, .nav-link{

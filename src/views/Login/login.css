@@ -30,6 +30,13 @@ label {
   border: 1px solid #ced4da;
   border-radius: 4px;
 }
+.margin-right-n-2{
+  margin-right: -2rem;
+}
+.display-flex-password{
+  display: flex;
+  align-items: center;
+}
 .small_form {
   width: 50%;
   margin-left: 25%;
@@ -73,10 +80,10 @@ label {
     transform: translateY(-50%);
 }
 
-.flex{
+/* .flex{
   display: flex;
   gap: 2rem;
-}
+} */
 .deneme{
   border-radius: 3px;
     display: inline-block;

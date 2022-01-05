@@ -33,6 +33,7 @@ html {
   --black: #171321;
   --magenta: #e310cb;
   --secondary-background: #1565c0;
+  --grey: #f9f9f9;
 }
 
 @media (prefers-color-scheme: dark) {

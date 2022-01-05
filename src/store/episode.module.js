@@ -1,25 +1,17 @@
 import ApiService from '@/services/api.service';
-import JwtService from '@/services/jwt.service';
+// import JwtService from '@/services/jwt.service';
+import 
+episodeService
+  from '../services/api.service.js';
 
 const state = {
-  errors: null,
-  user: {},
-  error_status:false,
-  isAuthenticated: !!JwtService.getToken()
+  currentEpisode:{}
 };
 
 const getters = {
-  currentUser(state) {
-    return state.user;
-  },
-  isAuthenticated(state) {
-    return state.isAuthenticated;
-  },
-  getErrors(state) {
-    return state.errors;
-  },
-  getErrorStatus(state) {
-    return state.error_status;
+
+  getCurrentEpisode(state) {
+    return state.currentEpisode;
   }
 };
 
@@ -36,28 +28,24 @@ const actions = {
         });
     });
   },
+  getEpisode (dispatch, params) {
+    return new Promise(resolve => {
+      episodeService.get('episodes/episode-detail', params)
+        .then(({ data }) => {
+		      resolve(data)
+          dispatch.commit('setCurrentEpisode', data.episodes[0])
+        })
+        .catch(error => {
+          throw new Error(error);
+        });
+    });
+  }
   
 };
 
 const mutations = {
-  authenticateUser(state, data) {
-    state.isAuthenticated = true;
-    state.user = data.user;
-    state.errors = false;
-    state.error_status = false;
-    JwtService.saveToken(data.token);
-    ApiService.setHeader();
-  },
-  setError(state, error) {
-    console.log(error)
-    state.errors = error;
-    state.error_status = true;
-  },
-  logOutUser(state) {
-    state.isAuthenticated = false;
-    state.user = {};
-    state.errors = {};
-    JwtService.destroyToken();
+  setCurrentEpisode(state, episode) {
+    state.currentEpisode = episode
   }
 };
 export default {

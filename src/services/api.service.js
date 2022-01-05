@@ -14,7 +14,8 @@ const episodeService = {
     Vue.use(VueAxios, axios);
     Vue.axios.defaults.baseURL = API_URL;
     Vue.axios.defaults.headers = { 'Access-Control-Allow-Origin': '*' };
-    // Vue.axios.defaults.headers['Authorization'] = 'Bearer asdasdas';
+    console.log(JwtService.getToken())
+    Vue.axios.defaults.headers['Authorization'] = 'Bearer '+JwtService.getToken();
     // Vue.axios.defaults.baseURL =
     //   'https://imdb-api.com/en/API/SeasonEpisodes/' + apikey;
   },
@@ -30,8 +31,12 @@ const episodeService = {
   },
 
   get(resource, params) {
+    console.log(params)
+    var str_params = this.formatURLParams(params.filters);
+    console.log(str_params)
+
     return Vue.axios
-      .get(`${resource}/${params}`)
+      .get(`${resource}`+str_params)
       .catch(error => {
         throw new Error(`[RWV] ApiService ${error}`);
       });
@@ -39,6 +44,20 @@ const episodeService = {
   post(resource, params) {
     return Vue.axios.post(`${resource}`, params);
   },
+  formatURLParams (params){
+    var str_params = '';
+    if(params){
+      str_params = '?';
+      var parts = [];
+      for(var i in params){
+        parts.push(i + '=' + params[i]);
+      }	
+
+      str_params = '?'+parts.join('&');	
+    }
+
+    return str_params;
+  }
 };
 axios.interceptors.response.use((res) => {
   // vue_instance.$store.commit('setPageLoading', false);
@@ -57,5 +76,6 @@ axios.interceptors.response.use((res) => {
 	
   return Promise.reject(error.response);
 });
+
 
 export default episodeService;

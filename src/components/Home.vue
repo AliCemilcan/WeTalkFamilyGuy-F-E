@@ -70,7 +70,9 @@ export default {
     fetch(index) {
       var params = {
         // id: 'tt0182576',
-        seasonNumber: index,
+        filters:{
+          seasonNumber: index,
+        }
       };
       //const apikey = 'k_y7s2rd5h';
       this.$store.dispatch('getSeason', params).then((response) => {
@@ -185,7 +187,7 @@ h2 {
   border-top-right-radius: 16px;
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  background-image: url(/img/familyguy.ba4ae1b1.png) /* text-align: left; */;
+  background-image: url("../assets/familyguy.png");
 }
 .info-image {
   border-radius: 8px;

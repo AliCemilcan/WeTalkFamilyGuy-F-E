@@ -73,6 +73,21 @@ const actions = {
           context.commit('setError', response.data.errors);
         });
     })
+  },
+  checkAccessToken(context, param) {
+    if (JwtService.getToken()) {
+      return new Promise(resolve => {
+        ApiService.post('checkAuth', param)
+          .then(({ data }) => {
+            resolve(data)
+            context.commit('authenticateUser', data);
+          }).catch(({ response }) => {
+            context.commit('setError', response.data.errors);
+          });
+      })
+      
+    }
+    
   }
 };
 
