@@ -1,3 +1,11 @@
+:root {
+  --app-color: #2c3e50;
+  --primary-background: #6a73b6;
+  --black: #171321;
+  --magenta: #e310cb;
+  --secondary-background: #1565c0;
+  --grey: #f9f9f9;
+}
 p {
   text-align: justify;
 }
@@ -33,6 +41,13 @@ h3 {
   letter-spacing: 0em;
   text-align: left;
   color: #000000;
+}
+.already-voted{
+  color: var(--magenta);
+  pointer-events: none;
+}
+.unauthorized{
+  pointer-events: none;
 }
 .episode_list {
   padding: 12px;
@@ -134,6 +149,10 @@ h3 {
   font-size: 20px;
   color: #000000;
 }
+.user-comment-text {
+  font-size: 18px;
+  color: #000000;
+}
 .date-episode {
   font-family: Roboto;
   font-style: normal;
@@ -149,10 +168,29 @@ h3 {
   height: 24px;
   vertical-align: -0.9em;
 }
+.ml-auto{
+  margin-left: auto;
+}
+.mr-1{
+  margin-right: 1rem;
+}
+.vertical-align-reset{
+  vertical-align: -0.5rem !important;
+}
 .episode-border {
   border: 2px solid #e5e5e5;
   box-sizing: border-box;
   border-radius: 16px;
+}
+.user-comment-border{
+  display: flex;
+  flex-flow: column;
+  gap: 2px;
+  border: 1px solid #e5e5e5;
+  box-sizing: border-box;
+  border-radius: 10px;
+  text-align: left;
+  padding: 8px 12px 12px 12px
 }
 .hot-topic-border {
   display: flex;
@@ -167,6 +205,10 @@ h3 {
 .hot-topic-border:hover{
   box-shadow: 0 0 32px 0 #cacde1;
 
+}
+.small-button-shadow:hover{
+  box-shadow: 1px 3px grey;
+  color: var(--magenta);
 }
 .chat_icon_size {
   /* color: black; */

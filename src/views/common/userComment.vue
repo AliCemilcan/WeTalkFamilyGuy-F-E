@@ -5,7 +5,19 @@
         <div class="hot-topic-flex">
        
           <span class="user-episode"> <b>@</b>{{ post.userName }} </span>
-          <span class="date-episode"> {{ ISODateTimePrettier(post.created_at) }} </span>
+          
+          <span class="date-episode ml-auto mr-1"> {{ ISODateTimePrettier(post.created_at) }} </span>
+          <span>
+            <a @click="savePost()">
+              <b-icon
+                :class="[userAlreadyUpvoted]"
+                icon="bookmark-plus"
+                aria-hidden="true"
+                class="small-button-shadow vertical-align-reset"
+              /> </a> 
+
+          </span>
+          
           <span
             v-if="showExtraSeason"
             class="season-episode-bubble"
@@ -27,13 +39,14 @@
       </a>
 
       <comment-buttons
-        :comments="post.comments"
+        :post="post"
         @openReplyArea="openReplyArea"
         @openCommentsAll="openCommentsAll"
       />
       
       <comment-reply
         v-if="open_reply"
+        :post-id="post._id"
         @closeReplyModal="openReplyArea()"
       />
       <div v-if="post.comment && show_one_comment && !show_only_title">
@@ -57,6 +70,8 @@ import singleComment from '../comments/singleComment.vue';
 import commentReply from '../comments/commentReply.vue';
 import commentButtons from '../comments/commentButtons.vue';
 import commentMixin from '../../mixins/commentMixin';
+import { mapGetters } from 'vuex';
+
 export default {
   components: {
     singleComment,
@@ -73,6 +88,20 @@ export default {
     post:{
       required: true,
       type: Object
+    }
+  },
+  computed: {
+    ...mapGetters(['currentUser']),
+    userAlreadyUpvoted(){
+      if(this.currentUser){
+        if(this.post.savedBy.includes(this.currentUser._id)){
+          return 'already-voted'
+        }else{
+          return ''
+        }
+      }else{
+        return 'unauthorized'
+      }
     }
   },
   data() {
@@ -126,6 +155,18 @@ export default {
   methods: {
     openReplyArea(){
       this.open_reply = !this.open_reply
+    },
+    savePost(){
+      var params = {
+        post: this.post._id,
+        user: this.currentUser._id
+      }
+      this.$store.dispatch('savePost', params).then((res) => {
+        console.log(res)
+      }).catch( e => {
+        console.log(e)
+      })
+
     }
   }
 };

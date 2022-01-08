@@ -120,7 +120,11 @@ export default {
           password: this.form.password_1
         };
         this.$store.dispatch('UserLogin', params).then(() => {
-          this.$router.push({ name: 'season', params: {id: 1} });
+          if(this.$router.go(-1)){
+            this.$router.go(-1)
+          }else{
+            this.$router.push({ name: 'season', params: {id: 1} });
+          }
         });
       }
     },

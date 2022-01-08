@@ -1,8 +1,8 @@
 <template>
-  <div class="padding-1">
+  <div class="padding-1 mt-1">
     <b-form
       class="reply-single-comment"
-      @submit="onSubmit"
+      @submit.prevent="onSubmit"
     >
       <b-form-textarea
         id="textarea"
@@ -13,6 +13,7 @@
       />
       <div class="text-right mt-1 mb-1">
         <b-button
+          size="sm"
           :disabled="input_disabled_submit"	
           variant="outline-danger"
           @click="closeModal()"
@@ -20,6 +21,7 @@
           Delete
         </b-button>
         <b-button
+          size="sm"
           type="submit"
           class="margin-left-1"
           variant="success"
@@ -32,7 +34,14 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
+  props:{
+    postId:{
+      type: String,
+      required: true
+    }
+  },
   data(){
     return{
       reply_content:''
@@ -40,17 +49,29 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['currentUser']),
 	  input_disabled_submit(){
 		  return this.reply_content == ''
 	  }
   },
   methods: {
     onSubmit(){
+      var params = {
+        text: this.reply_content,
+        createdBy: this.currentUser._id,
+        postID: this.postId,
+        userName: this.currentUser.userName
+      }
+      this.$store.dispatch('createComment', params).then((res) => {
+        console.log(res)
+      }).catch( e => {
+        console.log(e)
+      })
 			
     },
     closeModal(){
       this.reply_content = ''
-	  this.$emit('closeReplyModal')
+	    this.$emit('closeReplyModal')
     }
   }
 }

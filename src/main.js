@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import router from './router';
+import {router} from './router';
 import App from './App.vue';
 import store from './store';
 import Vuex from 'vuex';
@@ -35,7 +35,7 @@ Vue.config.productionTip = false;
 
 export var vue_instance = new Vue({
   store: store,
-  router,
+  router: router,
   nameL: 'App',
   render: h => h(App)
 }).$mount('#app');

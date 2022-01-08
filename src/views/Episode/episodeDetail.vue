@@ -2,7 +2,7 @@
   <div class="episode-view">
     <div class="episode-top">
       <span>
-        <span class="underlined">Season {{ getCurrentEpisode.seasonNumber }}</span> > Episode {{ getCurrentEpisode.episodeNumber }}
+        <a @click="goToSeason()"><span class="underlined">Season {{ getCurrentEpisode.seasonNumber }}</span></a> > Episode {{ getCurrentEpisode.episodeNumber }}
         
       </span>
     </div>
@@ -185,13 +185,27 @@ export default ({
     });
   },
   methods: {
+    sendUserLoginPage(){
+      if(Object.keys(this.currentUser).length === 0){
+        this.$router.push({ name: 'login' });
+        return
+      }
+    },
+    goToSeason(){
+      this.$router.push({ name: 'season', params: {id: this.getCurrentEpisode.seasonNumber}});
+
+    },
     openNewPost(){
+      this.sendUserLoginPage()
       this.$refs['new-post'].show()
     },
     onReset(){
 
     },
+
     onSubmit(){
+      this.sendUserLoginPage()
+
       var params = {
         title: this.new_post.title,
         content: this.new_post.content,
@@ -201,7 +215,10 @@ export default ({
 
       this.$store.dispatch('createPost', params).then(() => {
         this.$refs['new-post'].hide()
-      });
+      }).catch( e => {
+        console.log(e)
+     
+      })
 
     }
 
@@ -255,6 +272,13 @@ b-button:hover{
 }
 .underlined{
   text-decoration: underline;
+}
+.underlined:hover{
+  color: var(--magenta) !important;
+}
+button:hover{
+  color: var(--magenta) !important;
+
 }
 .watch-buttons{
   display: flex;

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="hot-topic-border">
+    <div class="user-comment-border">
       <a @click="showComments()">
         <div
           class="hot-topic-flex"
         >
-          <span class="user-episode"> @{{ comments.userName }} </span>
+          <span class="user-comment-text"> @{{ comments.userName }} </span>
           <span class="date-episode"> 12/10/2021 - 10:19 PM </span>
           <span
             v-if="showExtraSeason"
@@ -17,19 +17,20 @@
             </span>
           </span>
         </div>
-        <div class="episode-title margin-left-10 mt-1">
+        <div class="margin-left-10 mt-1">
           <span>
-            {{ comments.title }}
+            {{ comments.text }}
           </span>
         </div>
       </a>
       <comment-buttons
-        :comments="comments"
+        :post="comments"
         @openReplyArea="openReplyArea"
         @openCommentsAll="openCommentsAll"
       />
       <comment-reply
         v-if="open_reply"
+        :post-id="comments._id"
         @closeReplyModal="openReplyArea()"
       />
       <div v-if="comments.comment && show_one_comment && !show_only_title">

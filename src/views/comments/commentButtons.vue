@@ -6,15 +6,21 @@
           <b-icon
             icon="reply-fill"
             aria-hidden="true"
+            class="small-button-shadow"
           /> </a>
       </span>
 
       <span>
-        <b-icon
-          icon="arrow-up"
-          aria-hidden="true"
-        />
-        <span class="chat-text">{{ comments.likes }}</span>
+        <a @click="upVote()">
+          <b-icon
+
+            icon="arrow-up"
+            aria-hidden="true"
+            class="small-button-shadow"
+            :class="[userAlreadyUpvoted]"
+          />
+        </a>
+        <span class="chat-text">{{ post.upVotes.length }}</span>
       </span>
        
       <span>
@@ -22,10 +28,11 @@
           <b-icon
             icon="chat-right-text-fill"
             aria-hidden="true"
+            class="small-button-shadow"
           />
         </a>
 
-        <span class="chat-text"> {{ comments.messages }} </span>
+        <span class="chat-text"> {{ post.comments.length }} </span>
 
 
       </span>
@@ -34,14 +41,29 @@
 </template>
 <script>
 import commentMixin from '../../mixins/commentMixin';
+import { mapGetters } from 'vuex';
 export default {
   mixins: [commentMixin],
   props:{
-    comments:{
+    post:{
       type: Object,
       default: function () {
         return '';
       },
+    }
+  },
+  computed: {
+    ...mapGetters(['currentUser']),
+    userAlreadyUpvoted(){
+      if(this.currentUser){
+        if(this.post.upVotes.includes(this.currentUser._id)){
+          return 'already-voted'
+        }else{
+          return ''
+        }
+      }else{
+        return 'unauthorized'
+      }
     }
   },
   data(){
@@ -54,9 +76,29 @@ export default {
 	  openCommentsAll(){
 		  this.$emit('openCommentsAll')
 	  },
+    sendUserLoginPage(){
+      if(Object.keys(this.currentUser).length === 0){
+        this.$router.push({ name: 'login' });
+        return
+      }
+    },
 	  openReplyArea(){
+      this.sendUserLoginPage();
 		  this.$emit('openReplyArea')
-	  }
+	  },
+    upVote(){
+      this.sendUserLoginPage();
+      var params = {
+        id: this.post._id,
+        user: this.currentUser._id
+      }
+      this.$store.dispatch('upVoteComment', params).then((res) => {
+        console.log(res)
+      }).catch( e => {
+        console.log(e)
+      })
+
+    }
   }
 }
 </script>

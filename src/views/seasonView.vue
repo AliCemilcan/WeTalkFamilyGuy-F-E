@@ -182,12 +182,12 @@ h3 {
   color: #000000;
 }
 .episode_list {
-  padding: 12px;
-  width: 55%;
+  padding: 1rem 0rem 1rem 0.5rem;
+  width: 60%;
 }
 .topic_list {
-  padding: 16px;
-  width: 45%;
+  padding: 1rem 0.5rem 1rem 0rem;
+  width: 40%;
 }
 .episode_img_holder {
   max-width: 250px;
@@ -203,7 +203,7 @@ h3 {
 }
 .col {
   flex: 0 0 100% !important;
-  padding: 12px 12px 12px 26px;
+  padding: 1rem 0.5rem 1rem 0.5rem;
 }
 .flex {
   position: relative;
@@ -232,6 +232,8 @@ h3 {
 }
 .season_list {
     display: flex;
+    justify-content: space-between;
+    gap: 1rem;
     border: 2px solid #E5E5E5;
     box-sizing: border-box;
     border-radius: 16px;
@@ -304,7 +306,7 @@ h3 {
 .hot-topic-border {
   display: flex;
   flex-flow: column;
-  gap: 6px;
+  gap: 5px;
   border: 2px solid #e5e5e5;
   box-sizing: border-box;
   border-radius: 16px;

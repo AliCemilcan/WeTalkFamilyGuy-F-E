@@ -1,3 +1,12 @@
+:root {
+  --app-color: #2c3e50;
+  --primary-background: #6a73b6;
+  --black: #171321;
+  --magenta: #e310cb;
+  --secondary-background: #1565c0;
+  --grey: #f9f9f9;
+}
+
 .login-main{
   background-color: var(--white);
   box-shadow: 0 0 32px 0 #cacde1;

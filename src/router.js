@@ -4,7 +4,7 @@ import store from './store';
 
 Vue.use(Router);
 
-export default new Router({
+export const router =  new Router({
   mode: 'history',
   routes: [
     {
@@ -26,7 +26,10 @@ export default new Router({
     {
       name: 'settings',
       path:'/settings',
-      component: () => import('@/views/Profile/profileView.vue')
+      component: () => import('@/views/Profile/profileView.vue'),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path:'/',
@@ -49,39 +52,30 @@ export default new Router({
     {
       path: '/season-:season_id/episode-:episode_id',
       name: 'episode_detail',
-      component: () => import('@/views/Episode/episodeDetail.vue'),
-      beforeEnter: (to, from, next ) => {
-      //admin routes //organizations //providers //smes //categories //courses //configs
-        var current_user = JSON.parse(JSON.stringify(store.getters.currentUser))
-        console.log(current_user, current_user == {})
-        if (Object.keys(current_user).length === 0) {
-          store.dispatch('checkAccessToken').then(res => {
-            console.log(res)
-          })
-        }
-        next();
-        // if (store.getters.getRole == 0) {
-        //   store
-        //     .dispatch('checkAccessToken')
-        //     .then(res => {
-        //     // check for csm also for agency view
-        //       if (
-        //         store.getters.getRole == 'admin' ||
-        //       store.getters.getRole == 'csm'
-        //       ) {
-        //         next();
-        //       } else {
-        //         window.location.href = '/'.store.getters.getRole.charAt(0);
-        //       }
-        //     })
-        //     .catch(error => {
-        //       window.location.href = '/';
-        //     });
-        // } 
-      }
+      component: () => import('@/views/Episode/episodeDetail.vue')
       
     }
 
   
   ]
 });
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) { 
+    if (!store.getters.isAuthenticated) {
+      next({
+        path: '/login'
+      })
+    } else {
+      store.dispatch('checkAccessToken').then(res => {
+        console.log(res)
+      }).catch(e => {
+        console.log(e)
+        this.$store.dispatch('logOut').then(() => {
+          this.$router.push({ name: 'login' });
+        });
+      });
+    }
+  }
+  next();
+
+})

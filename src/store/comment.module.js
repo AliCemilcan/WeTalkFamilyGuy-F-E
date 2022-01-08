@@ -21,7 +21,40 @@ const actions = {
           context.commit('setError', response.data.errors);
         });
     });
-  }
+  },
+  createComment(context, param) {
+    return new Promise(resolve => {
+      ApiService.post('comment', param)
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch(({ response }) => {
+          context.commit('setError', response.data.errors);
+        });
+    });
+  },
+  upVoteComment(context, param) {
+    return new Promise(resolve => {
+      ApiService.post('posts/vote-up', param)
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch(({ response }) => {
+          context.commit('setError', response.data.errors);
+        });
+    });
+  },
+  savePost(context, param) {
+    return new Promise(resolve => {
+      ApiService.post('posts/save-post', param)
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch(({ response }) => {
+          context.commit('setError', response.data.errors);
+        });
+    });
+  },
   
 };
 
