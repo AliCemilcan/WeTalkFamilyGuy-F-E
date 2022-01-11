@@ -90,8 +90,15 @@ export default {
       type: Object
     }
   },
+  data() {
+    return {
+      open_reply: false,
+      show_one_comment: true,
+      show_only_title: true,
+    }
+  },
   computed: {
-    ...mapGetters(['currentUser']),
+    ...mapGetters(['currentUser', 'isAuthenticated']),
     userAlreadyUpvoted(){
       if(this.currentUser){
         if(this.post.savedBy.includes(this.currentUser._id)){
@@ -104,68 +111,26 @@ export default {
       }
     }
   },
-  data() {
-    return {
-      open_reply: false,
-      show_one_comment: true,
-      show_only_title: true,
-      comments: {
-        userName: 'AliCemilcan',
-        SeasonEpisode: 'Se1Ep1',
-        title: 'I love this episode becasuse I love Zohar',
-        likes: 122,
-        messages: 11,
-        comment: [
-          {
-            userName: 'ZoharAtenas',
-            SeasonEpisode: 'Se1Ep1',
-            title: 'This is a comment',
-            likes: 52,
-            messages: 11,
-            comment: [
-              {
-                userName: 'Ferzan',
-                SeasonEpisode: 'Se1Ep1',
-                title: 'I am not sure about that',
-                likes: 2,
-                messages: 3,
-              },
-            ],
-          },
-          {
-            userName: 'Doruk',
-            SeasonEpisode: 'Se1Ep1',
-            title: 'Stop capping fam fam',
-            likes: 992,
-            messages: 1,
-            comment: [
-              {
-                userName: 'VidddddMiami',
-                SeasonEpisode: 'Se1Ep1',
-                title: 'Fuck all the girls nigg',
-                likes: 2,
-                messages: 87,
-              }
-            ]
-          },
-        ],
-      },
-    };
-  },
+
   methods: {
     openReplyArea(){
       this.open_reply = !this.open_reply
     },
     savePost(){
-      var params = {
-        post: this.post._id,
-        user: this.currentUser._id
+      if(this.isAuthenticated){
+        var params = {
+          post: this.post._id,
+          user: this.currentUser._id
+        }
+        this.$store.dispatch('savePost', params).then((res) => {
+          console.log(res)
+        }).catch( e => {
+          console.log(e)
+        })
+      }else{
+        this.$router.push({ name: 'login' });
       }
-      this.$store.dispatch('savePost', params).then((res) => {
-        console.log(res)
-      }).catch( e => {
-        console.log(e)
-      })
+
 
     }
   }

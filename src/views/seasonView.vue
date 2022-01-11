@@ -114,7 +114,7 @@ export default {
     ...mapGetters(['get_current_season']),
   },
   methods: {
-    openEpisode(e) {
+    openEpisode(e){
       console.log(e);
       this.$store.commit('openEpisode', e);
       this.$router.push({ name: 'episode_detail', params: { season_id:this.activeSeason, episode_id:e.episodeNumber } });
@@ -127,10 +127,13 @@ export default {
       // });
 
       // this.get_current_season.forEach((elem) => {
+
       //   elem.seasonEpisode = 'S' + elem.seasonNumber + 'E' + elem.episodeNumber;
-      //   this.$store.dispatch('createEpisode', elem).then((res) => {
+      //   this.$store.dispatch('createEpisode', elem).then(async (res) => {
       //     console.log(res);
       //   });
+       
+   
       // });
     },
   },

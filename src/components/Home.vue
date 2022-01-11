@@ -38,7 +38,7 @@
   </div>
 </template>
 <script>
-//import axios from 'axios'
+// import axios from 'axios'
 import seasonView from '../views/seasonView.vue';
 export default {
   name: 'Home',
@@ -74,7 +74,7 @@ export default {
           seasonNumber: index,
         }
       };
-      //const apikey = 'k_y7s2rd5h';
+      // const apikey = 'k_y7s2rd5h';
       this.$store.dispatch('getSeason', params).then((response) => {
         if (index != this.current_season) {
           this.$router.push({ name: 'season', params: { id: index } });

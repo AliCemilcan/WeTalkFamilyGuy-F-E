@@ -53,7 +53,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['currentUser']),
+    ...mapGetters(['currentUser', 'isAuthenticated']),
     userAlreadyUpvoted(){
       if(this.currentUser){
         if(this.post.upVotes.includes(this.currentUser._id)){
@@ -77,9 +77,20 @@ export default {
 		  this.$emit('openCommentsAll')
 	  },
     sendUserLoginPage(){
-      if(Object.keys(this.currentUser).length === 0){
+      if(!this.isAuthenticated){
+        console.log('?????')
         this.$router.push({ name: 'login' });
+
         return
+      }else if(Object.keys(this.currentUser).length === 0){
+        this.$store.dispatch('checkAccessToken').then(res => {
+          console.log(res)
+        }).catch(e => {
+          console.log(e)
+          this.$store.dispatch('logOut').then(() => {
+            this.$router.push({ name: 'login' });
+          });
+        });
       }
     },
 	  openReplyArea(){

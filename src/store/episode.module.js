@@ -1,4 +1,4 @@
-import ApiService from '@/services/api.service';
+// import ApiService from '@/services/api.service';
 // import JwtService from '@/services/jwt.service';
 import 
 episodeService
@@ -16,18 +16,18 @@ const getters = {
 };
 
 const actions = {
-  createEpisode(context, episode) {
-    return new Promise(resolve => {
-      ApiService.post('episodes', episode)
-        .then(({ data }) => {
-          context.commit('authenticateUser', data);
-          resolve(data);
-        })
-        .catch(({ response }) => {
-          context.commit('setError', response.data.errors);
-        });
-    });
-  },
+  // createEpisode(context, episode) {
+  //   return new Promise(resolve => {
+  //     ApiService.post('episodes', episode)
+  //       .then(({ data }) => {
+  //         context.commit('authenticateUser', data);
+  //         resolve(data);
+  //       })
+  //       .catch(({ response }) => {
+  //         context.commit('setError', response.data.errors);
+  //       });
+  //   });
+  // },
   getEpisode (dispatch, params) {
     return new Promise(resolve => {
       episodeService.get('episodes/episode-detail', params)

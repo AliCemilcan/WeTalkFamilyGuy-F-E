@@ -40,6 +40,9 @@ export const router =  new Router({
           name: 'season',
           
           component: () => import('./components/Home.vue'),
+          meta: {
+            requiresAuth: true
+          }
           // children: [{
           //   path: 'episode-:episode_id',
           //   name: 'episode_detail',
@@ -52,7 +55,10 @@ export const router =  new Router({
     {
       path: '/season-:season_id/episode-:episode_id',
       name: 'episode_detail',
-      component: () => import('@/views/Episode/episodeDetail.vue')
+      component: () => import('@/views/Episode/episodeDetail.vue'),
+      meta: {
+        requiresAuth: true
+      }
       
     }
 
@@ -61,20 +67,20 @@ export const router =  new Router({
 });
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) { 
-    if (!store.getters.isAuthenticated) {
-      next({
-        path: '/login'
-      })
-    } else {
-      store.dispatch('checkAccessToken').then(res => {
-        console.log(res)
-      }).catch(e => {
-        console.log(e)
-        this.$store.dispatch('logOut').then(() => {
-          this.$router.push({ name: 'login' });
-        });
+    // if (!store.getters.isAuthenticated) {
+    //   next({
+    //     path: '/login'
+    //   })
+    // } else {
+    store.dispatch('checkAccessToken').then(res => {
+      console.log(res)
+    }).catch(e => {
+      console.log(e)
+      this.$store.dispatch('logOut').then(() => {
+        this.$router.push({ name: 'login' });
       });
-    }
+    });
+  //   }
   }
   next();
 

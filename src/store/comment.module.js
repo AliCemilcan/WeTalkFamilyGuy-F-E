@@ -55,6 +55,18 @@ const actions = {
         });
     });
   },
+  getPostsByID(context, param) {
+    return new Promise(resolve => {
+      ApiService.post('posts/user-saved-posts', param)
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch(({ response }) => {
+          context.commit('setError', response.data.errors);
+        });
+    });
+  },
+  
   
 };
 

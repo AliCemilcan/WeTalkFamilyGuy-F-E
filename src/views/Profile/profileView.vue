@@ -2,6 +2,7 @@
   <div>
     <div class="login-main">
       <b-tabs
+        v-model="tabIndex"
         content-class="mt-3"
         fill
       >
@@ -145,10 +146,11 @@ export default {
         password_2: '',
         timer: undefined
       },
+      tabIndex: 0,
       user_view_text: 'Login',
       forgot_password: false,
-	  show_password_change: false,
-	  passwods_no_match: false
+      show_password_change: false,
+      passwods_no_match: false
     };
   },
   computed: {
@@ -160,9 +162,33 @@ export default {
       //   return '';
       // }
     },
-    ...mapGetters(['getErrors','getErrorStatus'])
+    ...mapGetters(['currentUser','getErrors','getErrorStatus'])
+  },
+  watch:{
+    tabIndex(val) {
+      switch (val) {
+      case 0:
+        break;
+      case 1:
+        this.getSavedPosts()
+        break;
+      case 2:
+        break;
+      }
+    }
   },
   methods: {
+    getSavedPosts(){
+      var params = {
+        id: this.currentUser._id,
+        posts: this.currentUser.savedPosts
+      }
+      console.log(params)
+      this.$store.dispatch('getPostsByID', params).then((res) => {
+        console.log(res)
+      });
+
+    },  
     onSubmit() {
       if (this.form.username && this.form.password_1) {
         var params = {
@@ -184,7 +210,7 @@ export default {
       this.show_password_change = !this.show_password_change
     }
   }
-};
+}
 </script>
 
 <style src="../Login/login.css">

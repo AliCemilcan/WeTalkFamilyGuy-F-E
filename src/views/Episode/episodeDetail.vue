@@ -169,7 +169,7 @@ export default ({
 		
   },
   computed: {
-    ...mapGetters(['currentUser', 'getCurrentEpisode']),
+    ...mapGetters(['currentUser', 'getCurrentEpisode', 'isAuthenticated']),
     input_disabled_submit(){
       return this.new_post.title == ''
     }
@@ -182,11 +182,22 @@ export default ({
       }
     }
     this.$store.dispatch('getEpisode', params).then(() => {
-    });
+    })
   },
   methods: {
     sendUserLoginPage(){
-      if(Object.keys(this.currentUser).length === 0){
+      if(this.isAuthenticated && Object.keys(this.currentUser).length === 0){
+        //get User Information
+        this.$store.dispatch('checkAccessToken').then(res => {
+          console.log(res)
+        }).catch(e => {
+          console.log(e)
+          this.$store.dispatch('logOut').then(() => {
+            console.log('????')
+            this.$router.push({ name: 'login' });
+          });
+        });
+      } else if(Object.keys(this.currentUser).length === 0){
         this.$router.push({ name: 'login' });
         return
       }

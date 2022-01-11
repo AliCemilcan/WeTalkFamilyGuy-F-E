@@ -14,15 +14,13 @@ const episodeService = {
     Vue.use(VueAxios, axios);
     Vue.axios.defaults.baseURL = API_URL;
     Vue.axios.defaults.headers = { 'Access-Control-Allow-Origin': '*' };
-    console.log(JwtService.getToken())
     Vue.axios.defaults.headers['Authorization'] = 'Bearer '+JwtService.getToken();
     // Vue.axios.defaults.baseURL =
     //   'https://imdb-api.com/en/API/SeasonEpisodes/' + apikey;
   },
   setHeader() {
-    Vue.axios.defaults.headers.common[
-      'Authorization'
-    ] = `Token ${JwtService.getToken()}`;
+    Vue.axios.defaults.headers['Authorization'] = 'Bearer '+JwtService.getToken();
+
   },
   query(resource, params) {
     return Vue.axios.get(resource, params).catch(error => {
@@ -31,10 +29,7 @@ const episodeService = {
   },
 
   get(resource, params) {
-    console.log(params)
     var str_params = this.formatURLParams(params.filters);
-    console.log(str_params)
-
     return Vue.axios
       .get(`${resource}`+str_params)
       .catch(error => {

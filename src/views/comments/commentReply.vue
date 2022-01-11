@@ -15,7 +15,7 @@
         <b-button
           size="sm"
           :disabled="input_disabled_submit"	
-          variant="outline-danger"
+          variant="danger"
           @click="closeModal()"
         >
           Delete
@@ -35,6 +35,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
+
 export default {
   props:{
     postId:{
@@ -50,7 +51,7 @@ export default {
   },
   computed: {
     ...mapGetters(['currentUser']),
-	  input_disabled_submit(){
+	    input_disabled_submit(){
 		  return this.reply_content == ''
 	  }
   },
@@ -63,6 +64,7 @@ export default {
         userName: this.currentUser.userName
       }
       this.$store.dispatch('createComment', params).then((res) => {
+	      this.$emit('closeReplyModal')
         console.log(res)
       }).catch( e => {
         console.log(e)

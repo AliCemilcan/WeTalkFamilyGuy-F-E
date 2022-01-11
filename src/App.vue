@@ -8,12 +8,28 @@
 
 <script>
 import Header from './components/Header.vue';
-
+import { mapGetters } from 'vuex';
 export default {
   name: 'App',
   components: {
     Header,
   },
+  computed:{
+    ...mapGetters(['currentUser', 'isAuthenticated']),
+  },
+  mounted(){
+    // if(this.isAuthenticated && Object.keys(this.currentUser).length === 0){
+    //   this.$store.dispatch('checkAccessToken').then(res => {
+    //     console.log(res)
+    //   }).catch(e => {
+    //     console.log(e)
+    //     this.$store.dispatch('logOut').then(() => {
+    //       this.$router.push({ name: 'login' });
+    //     });
+    //   });
+    // }
+
+  }
 };
 </script>
 

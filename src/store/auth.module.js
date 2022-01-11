@@ -1,6 +1,6 @@
 import ApiService from '@/services/api.service';
 import JwtService from '@/services/jwt.service';
-
+import { router } from '../router.js';
 const state = {
   errors: null,
   error_status: false,
@@ -76,13 +76,17 @@ const actions = {
   },
   checkAccessToken(context, param) {
     if (JwtService.getToken()) {
+      ApiService.setHeader();
       return new Promise(resolve => {
         ApiService.post('checkAuth', param)
           .then(({ data }) => {
             resolve(data)
             context.commit('authenticateUser', data);
           }).catch(({ response }) => {
-            context.commit('setError', response.data.errors);
+            console.log(response)
+            context.commit('logOutUser');
+            router.push({ name: 'login' });
+       
           });
       })
       
