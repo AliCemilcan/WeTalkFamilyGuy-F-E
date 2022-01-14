@@ -7,7 +7,39 @@
           <span class="user-episode"> <b>@</b>{{ post.userName }} </span>
           
           <span class="date-episode ml-auto mr-1"> {{ ISODateTimePrettier(post.created_at) }} </span>
-          <span>
+          <span v-if="postOwner">
+            <a @click="removePost()">
+              <b-dropdown
+                toggle-class="my-custom-toggle"
+                variant="'none'"
+                no-caret
+                size="'sm'"
+              >
+                <template
+                  #button-content
+                  class="cleaner"
+                >
+                  <b-icon
+                    class="small-button-shadow vertical-align-reset cleaner"
+                    icon="three-dots-vertical"
+                    aria-hidden="true" 
+                    font-scale="0.5"
+                  />
+                </template>
+                <b-dropdown-item-button>
+                  <b-icon
+                    class="small-button-shadow vertical-align-reset"
+                    icon="trash"
+                    aria-hidden="true" 
+                  />
+                 
+                </b-dropdown-item-button>
+              </b-dropdown>
+
+            </a>
+
+          </span>
+          <span v-else>
             <a @click="savePost()">
               <b-icon
                 :class="[userAlreadyUpvoted]"
@@ -15,19 +47,17 @@
                 aria-hidden="true"
                 class="small-button-shadow vertical-align-reset"
               /> </a> 
-
-          </span>
-          
-          <span
-            v-if="showExtraSeason"
-            class="season-episode-bubble"
-          >
+                      
             <span
-              class="bubble-inline-text"
-            >{{ post.SeasonEpisode }}/span>
+              v-if="showExtraSeason"
+              class="season-episode-bubble"
+            >
+              <span
+                class="bubble-inline-text"
+              >{{ post.SeasonEpisode }}/span>
+              </span>
             </span>
-          </span>
-        </div>
+          </span></div>
         <div class="episode-title ml-1 mt-1">
           <span>
             {{ post.title }}
@@ -53,9 +83,9 @@
         <single-comment :comments="post.comment[0]" />
       </div>
       <div
-        v-for="c in post.comments"
+        v-for="(c, index) in post.comments"
         v-else-if="!show_only_title"
-        :key="c"
+        :key="index"
       >
         <single-comment
           :nested-comment="true"
@@ -109,6 +139,18 @@ export default {
       }else{
         return 'unauthorized'
       }
+    },
+    postOwner(){
+      if(this.currentUser){
+        console.log(this.currentUser)
+        if(this.post.createdBy.includes(this.currentUser._id)){
+          return true
+        }else{
+          return false
+        }
+      }else{
+        return false
+      }
     }
   },
 
@@ -130,8 +172,21 @@ export default {
       }else{
         this.$router.push({ name: 'login' });
       }
-
-
+    },
+    removePost(){
+      if(this.isAuthenticated){
+        var params = {
+          post: this.post._id,
+          user: this.currentUser._id
+        }
+        this.$store.dispatch('removePost', params).then((res) => {
+          console.log(res)
+        }).catch( e => {
+          console.log(e)
+        })
+      }else{
+        this.$router.push({ name: 'login' });
+      }
     }
   }
 };

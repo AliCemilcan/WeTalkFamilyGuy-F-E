@@ -32,7 +32,7 @@
           />
         </a>
 
-        <span class="chat-text"> {{ post.comments.length }} </span>
+        <span class="chat-text"> {{ commentLength }} </span>
 
 
       </span>
@@ -63,6 +63,13 @@ export default {
         }
       }else{
         return 'unauthorized'
+      }
+    },
+    commentLength(){
+      if(this.post && this.post.comments){
+        return this.post.comments.length
+      }else{
+        return ''
       }
     }
   },

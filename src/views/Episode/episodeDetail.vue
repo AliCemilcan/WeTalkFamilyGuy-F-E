@@ -124,7 +124,7 @@
         <div class="w-100">
           <b-button
             pill
-            variant="outline-danger"
+            variant="danger"
           >
             DRAFT
           </b-button>
@@ -237,6 +237,9 @@ export default ({
 })
 </script>
 <style>
+.b-dropdown button:hover{
+  box-shadow: none !important;
+}
 button:hover{
   box-shadow: 0 0 32px 0 #cacde1;
 }
@@ -288,7 +291,7 @@ b-button:hover{
   color: var(--magenta) !important;
 }
 button:hover{
-  color: var(--magenta) !important;
+  /* color: var(--magenta) !important; */
 
 }
 .watch-buttons{

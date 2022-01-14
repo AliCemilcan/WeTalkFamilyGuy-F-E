@@ -6,6 +6,38 @@
   --secondary-background: #1565c0;
   --grey: #f9f9f9;
 }
+
+.btn-secondary { /* this is the button's class */
+    color: #000;
+    background-color: transparent;
+    border-color: transparent;
+}
+.btn-secondary.focus, .btn-secondary:focus, .btn-secondary:hover { /* this will change the button's hover & focus effect*/
+  background-color: none;
+  border-color: transparent;
+
+}
+.my-custom-toggle{
+  color: #171321;
+  text-decoration: none;
+  background-color: transparent;
+}
+.dropdown-toggle:hover{
+  background-color: transparent;
+}
+.btn-check:checked + .btn-secondary, .btn-check:active + .btn-secondary, .btn-secondary:active, .btn-secondary.active, .show > .btn-secondary.dropdown-toggle {
+    color: black;
+    background-color: #f9f9f9;
+    border-color: #f9f9f9;
+}
+.dropdown-menu{
+  max-width: 3.5rem;
+  min-width: 3.5rem !important;
+}
+.dropdown-item:hover{
+  background-color: transparent;
+  border-color: transparent;
+}
 p {
   text-align: justify;
 }
@@ -167,6 +199,11 @@ h3 {
   width: 24px;
   height: 24px;
   vertical-align: -0.9em;
+  display: inline-block;
+  overflow: visible;
+  /* vertical-align: -0.15em; */
+  min-width: 1.5rem;
+  min-height: 1.4rem;
 }
 .ml-auto{
   margin-left: auto;

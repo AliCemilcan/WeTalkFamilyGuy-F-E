@@ -299,7 +299,12 @@ h3 {
 .b-icon.bi {
   width: 24px;
   height: 24px;
-  vertical-align: -0.9em;
+  /* vertical-align: -0.9em; */
+  display: inline-block;
+  overflow: visible;
+  vertical-align: -0.15em;
+  min-width: 1.5rem;
+  min-height: 1.4rem;
 }
 .episode-border {
   border: 2px solid #e5e5e5;
