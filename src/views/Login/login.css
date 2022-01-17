@@ -21,6 +21,10 @@ label {
 .form-3 {
   width: 100%;
 }
+.profile-saved-posts{
+  width: 80%;
+  margin: auto;
+}
 .sign-up-button-text{
   text-decoration: underline;
   cursor: pointer;

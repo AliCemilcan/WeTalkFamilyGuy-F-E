@@ -17,7 +17,7 @@
             </span>
           </span>
         </div>
-        <div class="margin-left-10 mt-1">
+        <div class="mt-1">
           <span>
             {{ comments.text }}
           </span>

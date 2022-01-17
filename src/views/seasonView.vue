@@ -33,7 +33,11 @@
                     icon="chat"
                     aria-hidden="true"
                   />
-                  <span class="chat-text">
+                  <!-- <i
+                    class="fa fa-imdb"
+                    style="font-size: 38px"
+                  /> -->
+                  <span class="rating-text text-image-fit">
                     {{ e.imDbRating }}
                   </span>
                 </div>
@@ -302,7 +306,7 @@ h3 {
   /* vertical-align: -0.9em; */
   display: inline-block;
   overflow: visible;
-  vertical-align: -0.15em;
+  /* vertical-align: -0.15em; */
   min-width: 1.5rem;
   min-height: 1.4rem;
 }
@@ -320,6 +324,10 @@ h3 {
   border-radius: 16px;
   text-align: left;
   padding: 8px 16px 8px 16px;
+}
+.text-image-fit{
+  position: relative;
+  top: 6px;
 }
 .chat_icon_size {
   /* color: black; */

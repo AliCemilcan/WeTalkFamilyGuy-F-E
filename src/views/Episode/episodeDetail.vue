@@ -88,10 +88,7 @@
     >
       <div class="d-block text-center">
         <h3>Start Something!</h3>
-        <b-form
-          @submit="onSubmit"
-          @reset="onReset"
-        >
+        <b-form>
           <b-form-group
             id="input-group-1"
             class="mb-3 mt-3"
@@ -123,10 +120,12 @@
       >
         <div class="w-100">
           <b-button
+            type="reset"
             pill
             variant="danger"
+            @click="hideModal()"
           >
-            DRAFT
+            Cancel
           </b-button>
           <b-button
             type="submit"
@@ -136,7 +135,7 @@
             :disabled="input_disabled_submit"
             @click="onSubmit()"
           >
-            POST
+            Post
           </b-button>
         </div>
       </template>
@@ -210,10 +209,6 @@ export default ({
       this.sendUserLoginPage()
       this.$refs['new-post'].show()
     },
-    onReset(){
-
-    },
-
     onSubmit(){
       this.sendUserLoginPage()
 
@@ -231,6 +226,10 @@ export default ({
      
       })
 
+    },
+    hideModal(){
+      console.log('Here')
+      this.$refs['new-post'].hide()
     }
 
   }
@@ -348,4 +347,17 @@ button:hover{
 .margin-left-1{
   margin-left: 1rem;
 }
+
+@media all and (max-width: 700px) {
+  .episode-main-display{
+    display: flex;
+    flex-flow: column;
+    /* justify-content: space-between;
+    gap: 1rem; */
+  }
+  .message-display, .info-display {
+    width: 100%;
+  }
+}
+
 </style>

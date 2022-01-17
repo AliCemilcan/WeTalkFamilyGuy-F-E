@@ -106,6 +106,9 @@ export default {
 	  },
     upVote(){
       this.sendUserLoginPage();
+      if(this.userAlreadyUpvoted == 'already-voted' || this.userAlreadyUpvoted == 'unauthorized'){
+        return
+      }
       var params = {
         id: this.post._id,
         user: this.currentUser._id

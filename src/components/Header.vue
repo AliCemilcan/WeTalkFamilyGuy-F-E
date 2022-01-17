@@ -188,13 +188,16 @@ nav a:hover, .nav-link:hover{
     nav ul {
         position: fixed;
         left: -100%;
-        top: 5rem;
+        top: 0rem;
         flex-direction: column;
         background-color: #fff;
         width: 100%;
         border-radius: 10px;
         text-align: center;
         transition: 0.3s;
+        gap: 1rem;
+        padding: 1rem;
+        padding-right: 0rem;
         box-shadow:
             0 10px 27px rgba(0, 0, 0, 0.05);
     }

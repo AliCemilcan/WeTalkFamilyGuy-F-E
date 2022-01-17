@@ -127,6 +127,7 @@
           <div
             v-for="post in saved_posts"
             :key="post._id"
+            class="profile-saved-posts"
           >
             <user-comment
               :post="post"
