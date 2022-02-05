@@ -64,9 +64,19 @@ const actions = {
     context.commit('logOutUser');
   },
   forgotPassword(context, email) {
-    console.log(email)
     return new Promise(resolve => {
       ApiService.post('requestResetPassword', email)
+        .then(({ data }) => {
+          resolve(data)
+        }).catch(({ response }) => {
+          context.commit('setError', response.data.errors);
+        });
+    })
+  },
+  resetPassword(context, email) {
+    console.log(email)
+    return new Promise(resolve => {
+      ApiService.post('resetPassword', email)
         .then(({ data }) => {
           resolve(data)
         }).catch(({ response }) => {

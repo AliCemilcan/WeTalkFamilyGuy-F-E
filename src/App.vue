@@ -69,10 +69,7 @@ html {
   color: #2c3e50;
   background-color: var(--white);
   box-shadow: 0 0 32px 0 #cacde1;
-  /* margin-top: 40px; */
-  /* width: 95% !important; */
-  /* margin-left: auto;
-  margin-right: auto; */
+  min-height: 100vh;
 }
 #main-view{
   padding: 0% 10% 2% 10%;

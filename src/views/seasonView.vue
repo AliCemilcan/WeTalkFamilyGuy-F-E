@@ -24,30 +24,23 @@
               </div>
               <!-- <p>{{ e.plot }}</p> -->
               <div class="flex-col">
-                <div>
-                  <!-- <img
-                    class="chat_icon_size"
-                    src="../assets/Vector.png"
-                  > -->
+                <div class="icon-text-display">
                   <b-icon
                     icon="chat"
                     aria-hidden="true"
                   />
-                  <!-- <i
-                    class="fa fa-imdb"
-                    style="font-size: 38px"
-                  /> -->
-                  <span class="rating-text text-image-fit">
+            
+                  <span class="rating-text text-image-fit margin-left-4">
                     {{ e.imDbRating }}
                   </span>
                 </div>
-                <div>
+                <div class="icon-text-display">
                   <i
                     class="fa fa-imdb"
                     style="font-size: 38px"
                   />
 
-                  <span class="rating-text">
+                  <span class="rating-text margin-left-4">
                     {{ e.imDbRating }}
                   </span>
                 </div>
@@ -77,21 +70,20 @@
             <div class="episode-title margin-left-10 mt-1">
               <span>I love this episode becasuse I love Zohar</span>
             </div>
-            <div class="mt-1">
+            <div class="mt-1 icon-text-display">
+              <b-icon
+                icon="chat"
+                aria-hidden="true"
+                class="mr-1"
+              />
+              <span class="rating-text margin-left-4"> 122 </span>
+
               <span>
                 <b-icon
-                  icon="chat"
+                  icon="arrow-up"
                   aria-hidden="true"
                 />
-                <span class="chat-text"> 122 </span>
-
-              </span>
-              <span>
-                <img
-                  class="upvote-icon"
-                  src="../assets/upvote.png"
-                >
-                <span class="chat-text">133</span>
+                <span class="rating-text">133</span>
 
               </span>
             </div>
@@ -193,15 +185,19 @@ h3 {
   width: 60%;
 }
 .topic_list {
-  padding: 1rem 0.5rem 1rem 0rem;
+  padding: 1rem 0rem 1rem 0.5rem;
   width: 40%;
+}
+.icon-text-display{
+  display: flex;
+  align-items: center;
 }
 .episode_img_holder {
   max-width: 250px;
-  max-height: 150px;
+  max-height: 148px;
   min-width: 250px;
-  min-height: 152px;
-  border-radius: 16px;
+  min-height: 148px;
+  border-radius: 14px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
@@ -213,6 +209,7 @@ h3 {
   padding: 1rem 0.5rem 1rem 0.5rem;
 }
 .flex {
+  max-height: 152px;
   position: relative;
   z-index: 0 !important;
   /* --corner-size: 2em; */
@@ -269,7 +266,7 @@ h3 {
 }
 .upvote-icon {
   margin-right: 2px;
-  vertical-align: -11px;
+  margin-left: 0.5rem;
   height: 22px;
 }
 .margin-left-10 {
@@ -279,12 +276,9 @@ h3 {
   font-family: Oxygen;
   font-size: 18px;
   font-weight: 500;
-  position: relative;
-  bottom: 6px;
 }
-.chat-text {
-  vertical-align: -8px;
-  font-family: Oxygen;
+.margin-left-4{
+  margin-left: 4px;
 }
 .user-episode {
   font-size: 20px;
@@ -326,8 +320,8 @@ h3 {
   padding: 8px 16px 8px 16px;
 }
 .text-image-fit{
-  position: relative;
-  top: 6px;
+  /* position: relative;
+  top: 6px; */
 }
 .chat_icon_size {
   /* color: black; */
@@ -357,6 +351,8 @@ h3 {
   .flex {
     gap: 0.1rem;
     flex-direction: column;
+    max-height: none !important
+    
   }
   .episode_img_holder {
     min-width: 100%;
@@ -426,6 +422,8 @@ h3 {
   .episode_img_holder {
     max-width: 200px;
     min-width:200px;
+    min-height: 150px;
+    max-height: 150px;
   }
 }
 </style>

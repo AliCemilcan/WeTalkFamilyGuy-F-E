@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div class="mt-3">
     <div>
       <b-form
+        v-if="!token_available"
         inline
+        class="display_flex"
         @submit.prevent="onSubmit"
       >
         <b-form-input
@@ -12,17 +14,18 @@
           class="small_form"
           required
         />
-        <div v-if="token_available">
-          <password-view />
-        </div>
+       
         <b-button
-          size="lg"
+          size="sm"
           type="submit"
           variant="primary"
         >
-          Reset
+          Send
         </b-button>
       </b-form>
+      <div v-else>
+        <password-view :token-available="token_available" />
+      </div>
     </div>
   </div>
 </template>
@@ -58,3 +61,6 @@ export default ({
   }
 })
 </script>
+<style src="./login.css">
+
+</style>

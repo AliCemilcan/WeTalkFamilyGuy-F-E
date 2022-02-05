@@ -35,7 +35,7 @@
             required
           />
           <b-form-invalid-feedback
-            :state="getErrorStatus"
+            :state="!getErrorStatus"
           >
             Password Wrong
           </b-form-invalid-feedback>

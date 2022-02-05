@@ -50,6 +50,10 @@ label {
   display: flex;
   align-items: center;
 }
+.display_flex{
+  display: flex;
+  gap: 0.5rem;
+}
 .small_form {
   width: 50%;
   margin-left: 25%;

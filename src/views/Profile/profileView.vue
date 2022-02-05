@@ -25,14 +25,41 @@
               label-for="input-1"
               description="We'll never share your email with anyone else."
             >
-              <b-form-input
-                id="input-1"
-                v-model="form.username"
-                type="email"
-                placeholder="Enter email"
-                required
-              />
+              <div class="display-flex-password">
+                <b-form-input
+                  id="input-1"
+                  v-model="form.username"
+                  class="margin-right-n-2"
+                  type="email"
+                  placeholder="Enter email"
+                  required
+                />
+                <b-icon
+                  icon="gear-fill"
+                  aria-hidden="true"
+                  class="hover"
+                  @click="emailSection()"
+                />
+              </div>
             </b-form-group>
+            <div v-if="show_email_change">
+              <b-form-group
+                id="input-group-1"
+                label="New Email"
+                label-for="input-new-email"
+              >
+                <b-form-input
+                  id="input-new-email"
+                  v-model="form.new_email"
+                  type="email"
+                  placeholder="Enter New Email"
+                  required
+                />
+              </b-form-group>
+              <b-form-invalid-feedback :state="!email_valid">
+                Email is not valid
+              </b-form-invalid-feedback>
+            </div>
             <b-form-group
               id="input-group-1"
               label="Password"
@@ -58,7 +85,7 @@
             <div v-if="show_password_change">
               <b-form-group
                 id="input-group-1"
-                label="Re Type Password"
+                label="New Password"
                 label-for="input-password"
               >
                 <b-form-input
@@ -67,12 +94,11 @@
                   type="password"
                   placeholder="Enter Password"
                   required
-                  @keyup="checkPasswordMatch($event)"
                 />
               </b-form-group>
               <b-form-group
                 id="input-group-1"
-                label="New Password"
+                label="Re-Type New Password"
                 label-for="input-password"
                 description=" Your password must be 8-20 characters long, contain letters and numbers, and must not
           contain spaces, special characters, or emoji."
@@ -82,6 +108,7 @@
                   v-model="form.password_new"
                   type="password"
                   placeholder="Enter New Password"
+                  @keyup="checkPasswordMatch($event)"
                 />
               </b-form-group>
               <b-form-invalid-feedback :state="!passwods_no_match">
@@ -98,8 +125,7 @@
                 Log Out
               </b-button>
               <b-button
-                :class="[input_disabled_submit]"
-
+                :disabled="input_disabled_submit"
                 size="lg"
                 type="submit"
                 variant="primary"
@@ -155,6 +181,7 @@ export default {
     return {
       form: {
         username:'',
+        new_username:'',
         password_1: '',
         password_2: '',
         timer: undefined
@@ -163,18 +190,20 @@ export default {
       user_view_text: 'Login',
       forgot_password: false,
       show_password_change: false,
+      show_email_change: false,
+      email_valid: false,
       passwods_no_match: false,
       saved_posts:[]
     };
   },
   computed: {
     input_disabled_submit() {
-      return ''
-      // if (!this.password_1 || !this.username) {
-      //   return 'input-disabled';
-      // } else {
-      //   return '';
-      // }
+      if (this.show_password_change || this.show_email_change) {
+        return false;
+      } else {
+        return true;
+
+      }
     },
     ...mapGetters(['currentUser','getErrors','getErrorStatus'])
   },
@@ -205,15 +234,36 @@ export default {
 
     },  
     onSubmit() {
-      if (this.form.username && this.form.password_1) {
-        var params = {
-          username: this.form.username,
-          password: this.form.password_1
-        };
-        this.$store.dispatch('UserLogin', params).then(() => {
-          this.$router.push({ name: 'season', params: {id: 1} });
-        });
+      //check if user update their email and password
+      var params = {
+        user_id: this.currentUser._id,
+        username: this.form.username,
+        password: this.form.password_1
+      };
+      if(this.show_password_change){
+        this.checkPasswordMatch()
+        if(!this.passwods_no_match){
+          params.new_password = this.form.password_new
+        }else{
+          return
+        }
       }
+      if(this.show_email_change){
+        this.validateEmail()
+        if(this.validateEmail()){
+          this.email_valid = false
+          params.new_email = this.form.new_username
+        }else{
+          this.email_valid = true
+          return
+        }
+      }
+      this.$store.dispatch('updateCredentials', params).then((res) => {
+        this.logOut();
+        console.log(res)
+      });
+
+
     },
     logOut() {
       this.$store.dispatch('logOut').then(() => {
@@ -221,9 +271,27 @@ export default {
       });
 
     },
+    validateEmail(email){
+      return String(email)
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+    },
+    checkPasswordMatch(){
+      if(this.form.password_2 != this.form.password_new){
+        this.passwods_no_match = true
+      }else{
+        this.passwods_no_match = false
+      }
+    },
     passwordSection(){
       this.show_password_change = !this.show_password_change
+    },
+    emailSection(){
+      this.show_email_change = !this.show_email_change
     }
+
   }
 }
 </script>
