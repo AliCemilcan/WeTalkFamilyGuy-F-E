@@ -68,6 +68,8 @@ export default {
     commentLength(){
       if(this.post && this.post.comments){
         return this.post.comments.length
+      }else if(this.post && this.post.childComments){
+        return this.post.childComments.length
       }else{
         return ''
       }

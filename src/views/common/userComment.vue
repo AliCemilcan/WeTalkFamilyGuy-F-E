@@ -80,7 +80,10 @@
         @closeReplyModal="openReplyArea()"
       />
       <div v-if="post.comment && show_one_comment && !show_only_title">
-        <single-comment :comments="post.comment[0]" />
+        <single-comment
+          :comments="post.comment[0]"
+          :main-post="post._id"
+        />
       </div>
       <div
         v-for="(c, index) in post.comments"
@@ -90,6 +93,7 @@
         <single-comment
           :nested-comment="true"
           :comments="c"
+          :main-post="post._id"
         />
       </div>
     </div>

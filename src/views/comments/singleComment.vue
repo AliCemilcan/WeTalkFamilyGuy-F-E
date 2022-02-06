@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="user-comment-border">
-      <a @click="showComments()">
+      <a @click="showComments('child')">
         <div
           class="hot-topic-flex"
         >
@@ -30,22 +30,39 @@
       />
       <comment-reply
         v-if="open_reply"
+        :child-comment="true"
         :post-id="comments._id"
+        :main-post="mainPost"
         @closeReplyModal="openReplyArea()"
       />
-      <div v-if="comments.comment && show_one_comment && !show_only_title">
+      <!-- <div v-if="comments.comment && show_one_comment && !show_only_title">
         <single-comment :comments="comments.comment[0]" />
+      </div> -->
+      <div 
+        v-if="comments.childComments && open_reply"
+      >
+        <div
+          v-for="c in child_comments"
+
+          :key="c.title"
+        >
+          <single-comment
+            :nested-comment="true"
+            :comments="c"
+          />
+        </div>
       </div>
-      <div
+      
+      <!-- <div
         v-for="c in comments.comment"
         v-else-if="!show_only_title"
         :key="c.title"
       >
         <single-comment
           :nested-comment="true"
-          :comments="c"
+          :child_comments="c"
         />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -68,22 +85,21 @@ export default {
         return '';
       },
     },
+    mainPost: {
+      type: String,
+      default: ''
+    },
   },
   data() {
     return {
       open_reply: false,
       show_one_comment: true,
       showExtraSeason: false,
-      show_only_title: false
+      show_only_title: false,
+      child_comments: []
     };
   },
   methods: {
-    // openCommentsAll(){
-    //   this.show_one_comment = !this.show_one_comment
-    // },
-    // openReplyArea() {
-    //   this.open_reply = !this.open_reply;
-    // },
   },
 };
 </script>

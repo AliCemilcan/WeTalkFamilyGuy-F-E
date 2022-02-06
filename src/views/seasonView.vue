@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="topic_list">
-        <h3>Hot Topics</h3>
+        <h3>🌶 Topics</h3>
         <div
           v-for="(e, index) in get_current_season"
           :key="index"

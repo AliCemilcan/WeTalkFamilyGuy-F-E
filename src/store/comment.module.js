@@ -77,6 +77,18 @@ const actions = {
         });
     });
   },
+  getCommentsByID (dispatch, params) {
+    return new Promise(resolve => {
+      ApiService.get('comment/'+ params.filters.commentID, params)
+        .then(({ data }) => {
+		      resolve(data)
+          
+        })
+        .catch(error => {
+          throw new Error(error);
+        });
+    });
+  }
   
   
 };
