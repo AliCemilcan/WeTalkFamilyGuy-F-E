@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import { API_URL } from './config';
 import JwtService from '@/services/jwt.service';
 import {vue_instance} from '../main';
 
@@ -12,7 +11,7 @@ import {vue_instance} from '../main';
 const episodeService = {
   init() {
     Vue.use(VueAxios, axios);
-    Vue.axios.defaults.baseURL = API_URL;
+    Vue.axios.defaults.baseURL = process.env.VUE_APP_API_URL
     Vue.axios.defaults.headers = { 'Access-Control-Allow-Origin': '*' };
     Vue.axios.defaults.headers['Authorization'] = 'Bearer '+JwtService.getToken();
     // Vue.axios.defaults.baseURL =
