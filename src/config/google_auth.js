@@ -54,6 +54,7 @@ var googleAuth = (function () {
 
     this.signIn = (successCallback, errorCallback) => {
       return new Promise((resolve, reject) => {
+        console.log(this.GoogleAuth)
       if (!this.GoogleAuth) {
         if (typeof errorCallback === 'function') errorCallback(false)
         reject(false)
