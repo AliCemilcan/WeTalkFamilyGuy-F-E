@@ -12,6 +12,8 @@ var googleAuth = (function () {
         }
       }
       document.getElementsByTagName('head')[0].appendChild(script)
+    }).catch(error => {
+      console.log(error)
     })
   }
 
