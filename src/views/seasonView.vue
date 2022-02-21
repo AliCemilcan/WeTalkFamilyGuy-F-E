@@ -9,47 +9,48 @@
           :key="index"
           class="col"
         >
-          <div class="flex episode-border">
-            <a @click="openEpisode(e)">
+          <a @click="openEpisode(e)">
+
+            <div class="flex episode-border">
               <img
-                class="episode_img_holder"
+                class="season_img_holder"
                 :src="e.image"
               >
-            </a>
-            <div class="text-area">
-              <span class="episode-number">EPISODE {{ e.episodeNumber }}</span>
-              <!-- <br> -->
-              <div class="episode-title margin-left-10 mt-2">
-                <span>"{{ e.title }}"</span>
-              </div>
-              <!-- <p>{{ e.plot }}</p> -->
-              <div class="flex-col">
-                <div class="icon-text-display">
-                  <b-icon
-                    icon="chat"
-                    aria-hidden="true"
-                  />
+              <div class="text-area">
+                <span class="episode-number">EPISODE {{ e.episodeNumber }}</span>
+                <!-- <br> -->
+                <div class="episode-title margin-left-10 mt-2">
+                  <span>"{{ e.title }}"</span>
+                </div>
+                <!-- <p>{{ e.plot }}</p> -->
+                <div class="flex-col">
+                  <div class="icon-text-display">
+                    <b-icon
+                      icon="chat"
+                      aria-hidden="true"
+                    />
             
-                  <span class="rating-text text-image-fit margin-left-4">
-                    {{ e.imDbRating }}
-                  </span>
-                </div>
-                <div class="icon-text-display">
-                  <i
-                    class="fa fa-imdb"
-                    style="font-size: 38px"
-                  />
+                    <span class="rating_text_season_view text-image-fit margin-left-4">
+                      {{ e.imDbRating }}
+                    </span>
+                  </div>
+                  <div class="icon-text-display">
+                    <i
+                      class="fa fa-imdb"
+                      style="font-size: 38px"
+                    />
 
-                  <span class="rating-text margin-left-4">
-                    {{ e.imDbRating }}
-                  </span>
-                </div>
-                <div class="start_thread">
-                  <span class="start-thread"> START A THREAD </span>
+                    <span class="rating_text_season_view margin-left-4">
+                      {{ e.imDbRating }}
+                    </span>
+                  </div>
+                  <div class="start_thread">
+                    <span class="start-thread"> START A THREAD </span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
       <div class="topic_list">
@@ -76,14 +77,14 @@
                 aria-hidden="true"
                 class="mr-1"
               />
-              <span class="rating-text margin-left-4"> 122 </span>
+              <span class="rating_text_season_view margin-left-4"> 122 </span>
 
               <span>
                 <b-icon
                   icon="arrow-up"
                   aria-hidden="true"
                 />
-                <span class="rating-text">133</span>
+                <span class="rating_text_season_view">133</span>
 
               </span>
             </div>
@@ -192,7 +193,7 @@ h3 {
   display: flex;
   align-items: center;
 }
-.episode_img_holder {
+.season_img_holder {
   max-width: 250px;
   max-height: 148px;
   min-width: 250px;
@@ -201,7 +202,7 @@ h3 {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
-.episode_img_holder:hover {
+.season_img_holder:hover {
   transform: scale(1.1) rotate(4deg);
 }
 .col {
@@ -272,7 +273,7 @@ h3 {
 .margin-left-10 {
   margin-left: 10px;
 }
-.rating-text {
+.rating_text_season_view {
   font-family: Oxygen;
   font-size: 18px;
   font-weight: 500;
@@ -305,6 +306,7 @@ h3 {
   min-height: 1.4rem;
 }
 .episode-border {
+  cursor: pointer;
   border: 2px solid #e5e5e5;
   box-sizing: border-box;
   border-radius: 16px;
@@ -354,7 +356,7 @@ h3 {
     max-height: none !important
     
   }
-  .episode_img_holder {
+  .season_img_holder {
     min-width: 100%;
     max-width: 100%;
     border-top-right-radius: 16px;
@@ -407,7 +409,7 @@ h3 {
   .season_list {
     flex-flow: column;
   }
-  .episode_img_holder {
+  .season_img_holder {
     max-width: 110px;
     min-width: 110px;
   }
@@ -419,7 +421,7 @@ h3 {
  
 }
 @media all and (min-width: 1071px) and (max-width: 1270px) {
-  .episode_img_holder {
+  .season_img_holder {
     max-width: 200px;
     min-width:200px;
     min-height: 150px;

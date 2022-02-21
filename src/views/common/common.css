@@ -215,6 +215,7 @@ h3 {
   vertical-align: -0.5rem !important;
 }
 .episode-border {
+  cursor: pointer;
   border: 2px solid #e5e5e5;
   box-sizing: border-box;
   border-radius: 16px;
