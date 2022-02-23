@@ -56,20 +56,24 @@
       <div class="topic_list">
         <h3>🌶 Topics</h3>
         <div
-          v-for="(e, index) in get_current_season"
+          v-for="(e, index) in get_current_season_posts"
           :key="index"
           class="col"
         >
-          <div class="hot-topic-border">
+          <user-comment
+            :post="e"
+            :show-extra-season="false"
+          />
+          <!-- <div class="hot-topic-border">
             <div class="hot-topic-flex">
-              <span class="user-episode"> @username </span>
-              <span class="date-episode"> 12/10/2021 - 10:19 PM </span>
+              <span class="user-episode"> @{{ e.userName }} </span>
+              <span class="date-episode"> {{ ISODateTimePrettier(e.created_at) }}</span>
               <span class="season-episode-bubble">
-                <span class="bubble-inline-text">Se1 Ep1</span>
+                <span class="bubble-inline-text">Se{{ e.seasonNumber }} Ep{{ e.episodeNumber }}</span>
               </span>
             </div>
             <div class="episode-title margin-left-10 mt-1">
-              <span>I love this episode becasuse I love Zohar</span>
+              <span>{{ e.content }}</span>
             </div>
             <div class="mt-1 icon-text-display">
               <b-icon
@@ -77,18 +81,18 @@
                 aria-hidden="true"
                 class="mr-1"
               />
-              <span class="rating_text_season_view margin-left-4"> 122 </span>
+              <span class="rating_text_season_view margin-left-4"> {{ e.comments.length }} </span>
 
               <span>
                 <b-icon
                   icon="arrow-up"
                   aria-hidden="true"
                 />
-                <span class="rating_text_season_view">133</span>
+                <span class="rating_text_season_view">{{ e.upVotes.length }}</span>
 
               </span>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -96,7 +100,13 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
+import commentMixin from '../mixins/commentMixin';
+import userComment from './common/userComment'
 export default {
+  components: {
+    userComment
+  },
+  mixins: [commentMixin],
   props: {
     activeSeason: {
       type: Number,
@@ -108,7 +118,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(['get_current_season']),
+    ...mapGetters(['get_current_season', 'get_current_season_posts']),
   },
   methods: {
     openEpisode(e){

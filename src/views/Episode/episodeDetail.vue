@@ -216,7 +216,9 @@ export default ({
         title: this.new_post.title,
         content: this.new_post.content,
         createdBy: this.currentUser._id,
-        episodeID: this.getCurrentEpisode._id
+        episodeID: this.getCurrentEpisode._id,
+        seasonNumber: this.$route.params.season_id,
+        episodeNumber: this.$route.params.episode_id,
       }
 
       this.$store.dispatch('createPost', params).then(() => {
