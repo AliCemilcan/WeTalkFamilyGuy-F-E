@@ -17,7 +17,22 @@
                 :src="e.image"
               >
               <div class="text-area">
-                <span class="episode-number">EPISODE {{ e.episodeNumber }}</span>
+                <div>
+                  <span class="episode-number">EPISODE {{ e.episodeNumber }} </span>
+                  
+                  <span>
+                    <b-button
+                      class="hover-magenta"
+                      variant="outline"
+                    > <b-icon
+                      icon="plus-square"
+                    /> Start Something</b-button>
+            
+                  </span>
+                </div>
+
+                  
+                
                 <!-- <br> -->
                 <div class="episode-title margin-left-10 mt-2">
                   <span>"{{ e.title }}"</span>
@@ -44,9 +59,20 @@
                       {{ e.imDbRating }}
                     </span>
                   </div>
-                  <div class="start_thread">
-                    <span class="start-thread"> START A THREAD </span>
-                  </div>
+                  <!-- <div class="start_thread">
+                    <span>
+                      <b-button
+                        class="hover-magenta"
+                        pill
+                        variant="outline"
+                      > <b-icon
+              
+                        icon="plus-square"
+                      /> Start Something</b-button>
+            
+                    </span>
+                    
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -176,6 +202,8 @@ h3 {
 }
 .season_img_holder:hover {
   transform: scale(1.1) rotate(4deg);
+  border-top-right-radius: 14px;
+  border-bottom-right-radius: 14px;
 }
 .col {
   flex: 0 0 100% !important;
@@ -225,17 +253,17 @@ h3 {
   bottom: 0.4rem; */
 }
 .text-area {
-  display: flex;
-  flex-direction: column;
-  gap: 0rem;
-  row-gap: 1rem;
-  text-align: left;
-  padding: 8px 4px 8px 16px;
-  border-top-left-radius: 0px !important;
-  border-bottom-left-radius: 0px !important;
-  border-radius: 16px;
-  box-shadow: 0 0 20px 0 #cacde1;
-  width: -webkit-fill-available;
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+    row-gap: 0.7rem;
+    text-align: left;
+    padding: 5px 4px 8px 16px;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-radius: 16px;
+    box-shadow: 0 0 20px 0 #cacde1;
+    width: -webkit-fill-available;
 }
 .upvote-icon {
   margin-right: 2px;
@@ -320,6 +348,10 @@ h3 {
 }
 .season-padding{
   padding: 1rem 0rem;
+}
+.hover-magenta:hover{
+  color: var(--magenta) !important;
+  /* box-shadow: 0 0 28px 0 #cacde1; */
 }
 @media all and (max-width: 700px) {
   .flex {

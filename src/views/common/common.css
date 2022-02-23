@@ -257,7 +257,7 @@ h3 {
   top: 2.666656494140625px;
   border-radius: 0px;
 }
-.start-thread {
+/* .start-thread {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -268,7 +268,7 @@ h3 {
   color: #ffffff;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 16px;
-}
+} */
 .season-padding{
   padding: 1rem 0rem;
 }
@@ -294,9 +294,9 @@ h3 {
   .topic_list {
     width: 100%;
   }
-  .start_thread{
+  /* .start_thread{
     display: none;
-  }
+  } */
 }
 .hot-topic-flex{
   display: flex;
