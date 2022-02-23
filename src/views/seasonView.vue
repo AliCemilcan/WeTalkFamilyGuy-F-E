@@ -55,44 +55,23 @@
       </div>
       <div class="topic_list">
         <h3>🌶 Topics</h3>
+        <div v-if="get_current_season_posts.length>0">
+          <div
+            v-for="(e, index) in get_current_season_posts"
+            :key="index"
+            class="col"
+          >
+            <user-comment
+              :post="e"
+              :show-extra-season="false"
+            />
+          </div>
+        </div>
         <div
-          v-for="(e, index) in get_current_season_posts"
-          :key="index"
+          v-else
           class="col"
         >
-          <user-comment
-            :post="e"
-            :show-extra-season="false"
-          />
-          <!-- <div class="hot-topic-border">
-            <div class="hot-topic-flex">
-              <span class="user-episode"> @{{ e.userName }} </span>
-              <span class="date-episode"> {{ ISODateTimePrettier(e.created_at) }}</span>
-              <span class="season-episode-bubble">
-                <span class="bubble-inline-text">Se{{ e.seasonNumber }} Ep{{ e.episodeNumber }}</span>
-              </span>
-            </div>
-            <div class="episode-title margin-left-10 mt-1">
-              <span>{{ e.content }}</span>
-            </div>
-            <div class="mt-1 icon-text-display">
-              <b-icon
-                icon="chat"
-                aria-hidden="true"
-                class="mr-1"
-              />
-              <span class="rating_text_season_view margin-left-4"> {{ e.comments.length }} </span>
-
-              <span>
-                <b-icon
-                  icon="arrow-up"
-                  aria-hidden="true"
-                />
-                <span class="rating_text_season_view">{{ e.upVotes.length }}</span>
-
-              </span>
-            </div>
-          </div> -->
+          <h5>Such Empty ..</h5> <h3>🤷‍♂</h3>
         </div>
       </div>
     </div>
@@ -122,26 +101,9 @@ export default {
   },
   methods: {
     openEpisode(e){
-      console.log(e);
       this.$store.commit('openEpisode', e);
       this.$router.push({ name: 'episode_detail', params: { season_id:this.activeSeason, episode_id:e.episodeNumber } });
-      
 
-
-      // e.seasonEpisode = 'S'+e.seasonNumber+'E'+e.episodeNumber
-      // this.$store.dispatch('createEpisode', e).then((res) => {
-      //   console.log(res)
-      // });
-
-      // this.get_current_season.forEach((elem) => {
-
-      //   elem.seasonEpisode = 'S' + elem.seasonNumber + 'E' + elem.episodeNumber;
-      //   this.$store.dispatch('createEpisode', elem).then(async (res) => {
-      //     console.log(res);
-      //   });
-       
-   
-      // });
     },
   },
 };

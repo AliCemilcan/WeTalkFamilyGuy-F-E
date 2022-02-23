@@ -14,8 +14,9 @@
           </h2>
           <span>
             <b-button
+              class="hover-magenta"
               pill
-              variant="outline-secondary"
+              variant="outline"
               @click="openNewPost()"
             > <b-icon
               
@@ -24,14 +25,19 @@
             
           </span>
         </div>
-        <div
-          v-for="post in getCurrentEpisode.posts"
-          :key="post._id"
-        >
-          <user-comment
-            :post="post"
-            :show-extra-season="false"
-          />
+        <div v-if="getCurrentEpisode.posts.length>0">
+          <div
+            v-for="post in getCurrentEpisode.posts"
+            :key="post._id"
+          >
+            <user-comment
+              :post="post"
+              :show-extra-season="false"
+            />
+          </div>
+        </div>
+        <div v-else>
+          <h5>Such Empty ..</h5> <h3>🤷‍♂</h3>
         </div>
       </div>
       <div class="info-display">
@@ -291,8 +297,8 @@ b-button:hover{
 .underlined:hover{
   color: var(--magenta) !important;
 }
-button:hover{
-  /* color: var(--magenta) !important; */
+.hover-magenta:hover{
+  color: var(--magenta) !important;
 
 }
 .watch-buttons{
