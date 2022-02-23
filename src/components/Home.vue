@@ -68,6 +68,8 @@ export default {
   },
   methods: {
     fetch(index) {
+      this.$store.commit('set_page_loading', true);
+
       var params = {
         // id: 'tt0182576',
         filters:{

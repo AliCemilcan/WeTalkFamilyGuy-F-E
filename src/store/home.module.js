@@ -10,7 +10,8 @@ const state = {
   user: {},
   current_season_episodes: '',
   currentEpisode: {},
-  current_season_posts:''
+  current_season_posts: '',
+  page_loading: false
 };
   
 const getters = {
@@ -22,6 +23,9 @@ const getters = {
   },
   get_current_episode(state){
     return state.currentEpisode
+  },
+  get_page_loading(state){
+    return state.page_loading
   }
 };
 // const setters = {
@@ -33,6 +37,10 @@ const mutations = {
   },
   set_current_season_posts(state, posts) {
     state.current_season_posts = posts
+    state.page_loading = false
+  },
+  set_page_loading(state, status) {
+    state.page_loading = status
   },
   openEpisode(state, e) {
     state.currentEpisode = e
@@ -59,6 +67,7 @@ export const actions = {
 		      resolve(data)
           dispatch.commit('set_current_season', data.episodes)
           dispatch.commit('set_current_season_posts', data.hot_topics)
+          // dispatch.commit('set_page_loading', false)
         })
         .catch(error => {
           throw new Error(error);

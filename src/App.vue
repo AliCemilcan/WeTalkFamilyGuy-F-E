@@ -2,17 +2,22 @@
   <div id="app">
     <Header class="header" />
     <vue-snotify />
-    <router-view id="main-view" />
+    <loader />
+    <router-view
+      id="main-view"
+    />
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue';
+import Loader from './components/Loader.vue'
 import { mapGetters } from 'vuex';
 export default {
   name: 'App',
   components: {
     Header,
+    Loader
   },
   computed:{
     ...mapGetters(['currentUser', 'isAuthenticated']),

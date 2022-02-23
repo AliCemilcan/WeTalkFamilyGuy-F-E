@@ -394,6 +394,7 @@ h3 {
   }
   .season_list {
     flex-flow: column;
+    border: 0px;
   }
   .col{
     padding: 12px 0px 12px 0px;
